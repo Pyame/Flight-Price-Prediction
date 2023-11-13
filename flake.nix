@@ -13,6 +13,7 @@
       devShell = pkgs.mkShell {
         buildInputs = with pkgs; [
           (python311.withPackages(ps: with ps; [
+            nbdime
             ipython
             jupyter
             numpy
@@ -23,7 +24,9 @@
           ]))
         ];
 
-        shellHook = "jupyter lab";
+        shellHook = ''
+          nbdime config-git --enable
+        '';
       };
     }
   );
